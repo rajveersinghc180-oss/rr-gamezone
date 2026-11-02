@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101312">
+<title>RR GameZone — Play Beyond Limits</title>
+<style>
+:root{--bg:#0b0f0e;--panel:#151b18;--panel2:#1c2420;--lime:#b7f34a;--muted:#9aa69e;--line:#2a342e;--white:#f4f7f2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Segoe UI,Arial,sans-serif}button,input{font:inherit}a{color:inherit;text-decoration:none}
+.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:#0c100f;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.5px;font-size:20px}.brand-mark{width:38px;height:38px;border-radius:11px;background:var(--lime);color:#10150c;display:grid;place-items:center;font-weight:1000;font-size:18px;box-shadow:0 0 25px #b7f34a33}
+nav{display:flex;gap:28px;color:#c4cec7;font-size:13px;font-weight:700}nav a:hover,nav a.active{color:var(--lime)}.nav-right{display:flex;align-items:center;gap:12px}.status{font-size:11px;color:var(--lime);border:1px solid #516a2d;border-radius:30px;padding:8px 12px;letter-spacing:1px}
+.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:8px;padding:8px}
+.hero{min-height:510px;padding:75px 6% 65px;position:relative;overflow:hidden;display:flex;align-items:center;background:linear-gradient(90deg,#0b100ff5 0%,#0b100fc9 48%,#0b100f20 100%),linear-gradient(0deg,#0b0f0e 0%,transparent 28%),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85') center 48%/cover}
+.hero:after{content:"";position:absolute;right:7%;top:16%;width:330px;height:330px;border:1px solid #b7f34a38;border-radius:50%;box-shadow:0 0 0 35px #b7f34a08,0 0 0 75px #b7f34a05}
+.hero-content{position:relative;z-index:1;max-width:650px}.eyebrow{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase}.hero h1{font-size:clamp(42px,6vw,76px);line-height:.98;margin:18px 0 20px;letter-spacing:-3px;text-transform:uppercase}.hero h1 span{color:var(--lime)}.hero p{color:#c0cbc3;max-width:520px;line-height:1.7;font-size:15px}.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}.btn{border:0;border-radius:7px;padding:13px 19px;font-weight:900;font-size:12px;letter-spacing:.6px;cursor:pointer;transition:.2s}.btn-primary{background:var(--lime);color:#11170b}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px #b7f34a30}.btn-ghost{background:#ffffff0d;color:white;border:1px solid #ffffff35}.btn-ghost:hover{border-color:var(--lime);color:var(--lime)}
+.stats{display:flex;gap:35px;margin-top:38px}.stat strong{display:block;font-size:20px}.stat small{color:var(--muted);font-size:10px;letter-spacing:1px}
+main{padding:0 6% 70px}.section-head{display:flex;justify-content:space-between;align-items:end;margin:48px 0 22px;gap:20px}.section-head h2{font-size:25px;margin:7px 0 0;letter-spacing:-.7px}.section-head p{color:var(--muted);font-size:12px;margin:0}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}.search{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line);color:white;border-radius:7px;padding:12px 14px;outline:none}.search:focus{border-color:var(--lime)}.filter{background:var(--panel);border:1px solid var(--line);color:#c8d1ca;border-radius:7px;padding:11px 14px;cursor:pointer;font-size:12px;font-weight:700}.filter.active,.filter:hover{background:var(--lime);color:#11170b;border-color:var(--lime)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.game-card{background:var(--panel);border:1px solid var(--line);border-radius:11px;overflow:hidden;transition:.25s;min-width:0}.game-card:hover{transform:translateY(-5px);border-color:#718e42;box-shadow:0 15px 35px #0006}.cover{height:185px;position:relative;background-size:cover;background-position:center}.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#101512 0%,transparent 70%)}.tag{position:absolute;z-index:1;top:12px;left:12px;background:var(--lime);color:#10150c;border-radius:4px;padding:6px 8px;font-size:9px;font-weight:1000;letter-spacing:1px}.heart{position:absolute;z-index:2;right:12px;top:10px;width:31px;height:31px;border-radius:50%;border:1px solid #ffffff55;background:#0b0f0caa;color:white;cursor:pointer;font-size:16px}.heart.saved{color:#ff7777;border-color:#ff7777}.game-info{padding:16px}.game-title{display:flex;justify-content:space-between;gap:8px;align-items:center}.game-title h3{margin:0;font-size:16px}.rating{color:var(--lime);font-size:11px;font-weight:800}.game-info p{color:var(--muted);font-size:12px;line-height:1.55;min-height:38px;margin:10px 0 14px}.card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px}.genre{color:#c4cec7;font-size:10px;text-transform:uppercase;letter-spacing:1px}.details{background:none;border:0;color:var(--lime);font-size:11px;font-weight:900;cursor:pointer}
+.feature{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;margin-top:58px;background:linear-gradient(120deg,#1b261d,#111815);border:1px solid #35432f;border-radius:13px;overflow:hidden}.feature-copy{padding:35px}.feature-copy h2{font-size:29px;margin:10px 0}.feature-copy p{color:var(--muted);line-height:1.7;font-size:13px}.feature-art{min-height:250px;background:linear-gradient(90deg,#18221c00,#10151222),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1000&q=85') center/cover}
+footer{border-top:1px solid var(--line);padding:27px 6%;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:11px}footer strong{color:var(--lime)}
+.modal-backdrop{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:20px;z-index:30}.modal-backdrop.show{display:grid}.modal{width:min(520px,100%);background:#151d18;border:1px solid #48583d;border-radius:13px;padding:24px;position:relative;box-shadow:0 20px 80px #000}.modal h2{margin:5px 0 10px}.modal p{color:#b3beb6;line-height:1.7;font-size:13px}.close{position:absolute;right:15px;top:13px;background:none;border:0;color:white;font-size:24px;cursor:pointer}.notice{font-size:11px;color:var(--muted);margin-top:13px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:45px 10px;border:1px dashed var(--line);border-radius:10px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}nav{gap:15px}.hero:after{right:-130px}}
+@media(max-width:600px){.topbar{padding:0 5%;height:66px}nav{display:none;position:absolute;top:66px;left:0;right:0;background:#101613;padding:18px 6%;flex-direction:column;border-bottom:1px solid var(--line)}nav.open{display:flex}.menu{display:block}.status{display:none}.hero{padding:65px 6%;min-height:500px;background-position:60% center}.hero h1{letter-spacing:-2px}.stats{gap:20px}.stat strong{font-size:17px}main{padding:0 5% 50px}.grid{grid-template-columns:1fr}.cover{height:205px}.section-head{align-items:start;flex-direction:column}.feature{grid-template-columns:1fr}.feature-art{min-height:180px;grid-row:1}.feature-copy{padding:25px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">RR</span><span>RR <span style="color:var(--lime)">GAMEZONE</span></span></a>
+  <nav id="nav"><a class="active" href="#home">HOME</a><a href="#games">GAMES</a><a href="#featured">FEATURED</a><a href="#about">ABOUT</a></nav>
+  <div class="nav-right"><span class="status">● ALL SYSTEMS READY</span><button class="menu" id="menuBtn" aria-label="Open menu">☰</button></div>
+</header>
+<section class="hero" id="home">
+ <div class="hero-content">
+  <div class="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</div>
+  <h1>PLAY<br><span>BEYOND</span><br>LIMITS.</h1>
+  <p>Discover open worlds, high-speed races and action-packed adventures. Your gaming destination starts right here.</p>
+  <div class="actions"><a class="btn btn-primary" href="#games">EXPLORE GAMES ↘</a><a class="btn btn-ghost" href="#featured">WHAT'S FEATURED</a></div>
+  <div class="stats"><div class="stat"><strong id="gameCount">06</strong><small>GAMES TO EXPLORE</small></div><div class="stat"><strong>24/7</strong><small>GAMING VIBES</small></div><div class="stat"><strong>100%</strong><small>GAMER ENERGY</small></div></div>
+ </div>
+</section>
+<main>
+ <section id="games">
+  <div class="section-head"><div><div class="eyebrow">THE COLLECTION</div><h2>Explore the game library</h2></div><p>Find your next favourite game.</p></div>
+  <div class="toolbar"><input id="search" class="search" type="search" placeholder="Search games..." aria-label="Search games"><button class="filter active" data-filter="All">ALL GAMES</button><button class="filter" data-filter="Action">ACTION</button><button class="filter" data-filter="Racing">RACING</button><button class="filter" data-filter="Adventure">ADVENTURE</button><button class="filter" data-filter="Sports">SPORTS</button></div>
+  <div class="grid" id="gameGrid"></div>
+ </section>
+ <section class="feature" id="featured">
+  <div class="feature-copy"><div class="eyebrow">SPOTLIGHT</div><h2>Big worlds. Bigger stories.</h2><p>From neon-lit streets to wide-open landscapes, explore games that let you make every session your own. Browse the library, save your favourites and discover something new.</p><a class="btn btn-primary" href="#games">BROWSE LIBRARY ↗</a></div>
+  <div class="feature-art" role="img" aria-label="Atmospheric night city lights"></div>
+ </section>
+ <section id="about" style="padding:45px 0 5px"><div class="eyebrow">ABOUT RR GAMEZONE</div><h2 style="margin:10px 0">Made for players. Built for fun.</h2><p style="max-width:650px;color:var(--muted);font-size:13px;line-height:1.8">RR GameZone is a fan-made gaming discovery website. Browse game cards, search by title, filter by genre and save favourites on this device. This demo does not sell or host games.</p></section>
+</main>
+<footer><div>© <span id="year"></span> <strong>RR GAMEZONE</strong>. GAME ON.</div><div>Independent fan-made gaming discovery demo · Not affiliated with any game publisher.</div></footer>
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><button class="close" id="closeModal" aria-label="Close">×</button><div class="eyebrow">GAME DETAILS</div><h2 id="modalTitle"></h2><p id="modalDesc"></p><div id="modalMeta" class="notice"></div><p class="notice">Game names and trademarks belong to their respective owners. Check official stores for availability and system requirements.</p></div></div>
+<script>
+const games=[
+ {id:1,name:"Grand Theft Auto V",genre:"Action",rating:"★ 9.5",tag:"OPEN WORLD",desc:"Explore a huge city, follow an action-packed story and enjoy a vast open-world experience.",img:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80",platform:"PC · PlayStation · Xbox"},
+ {id:2,name:"Forza Horizon 5",genre:"Racing",rating:"★ 9.2",tag:"RACING",desc:"Race across beautiful landscapes with a huge collection of cars and exciting events.",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80",platform:"PC · Xbox"},
+ {id:3,name:"Red Dead Redemption 2",genre:"Adventure",rating:"★ 9.7",tag:"ADVENTURE",desc:"Experience a cinematic western adventure in a detailed and living open world.",img:"https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=80",platform:"PC · PlayStation · Xbox"},
+ {id:4,name:"Need for Speed Heat",genre:"Racing",rating:"★ 8.4",tag:"STREET RACE",desc:"Build your ride, race through the night and prove yourself on the streets.",img:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80",platform:"PC · PlayStation · Xbox"},
+ {id:5,name:"Minecraft",genre:"Adventure",rating:"★ 9.0",tag:"SANDBOX",desc:"Build, explore and create your own world, one block at a time.",img:"https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=900&q=80",platform:"PC · Console · Mobile"},
+ {id:6,name:"EA SPORTS FC",genre:"Sports",rating:"★ 8.3",tag:"FOOTBALL",desc:"Take to the pitch, build your squad and enjoy the excitement of football.",img:"https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=900&q=80",platform:"PC · Console"}
+];
+const grid=document.getElementById("gameGrid"),search=document.getElementById("search");
+let activeFilter="All",saved=JSON.parse(localStorage.getItem("rrgz-favs")||"[]");
+function render(){
+ const q=search.value.trim().toLowerCase();
+ const list=games.filter(g=>(activeFilter==="All"||g.genre===activeFilter)&&(g.name.toLowerCase().includes(q)||g.genre.toLowerCase().includes(q)));
+ document.getElementById("gameCount").textContent=String(games.length).padStart(2,"0");
+ grid.innerHTML=list.length?list.map(g=>`<article class="game-card"><div class="cover" style="background-image:url('${g.img}')"><span class="tag">${g.tag}</span><button class="heart ${saved.includes(g.id)?"saved":""}" data-save="${g.id}" aria-label="Save ${g.name}">${saved.includes(g.id)?"♥":"♡"}</button></div><div class="game-info"><div class="game-title"><h3>${g.name}</h3><span class="rating">${g.rating}</span></div><p>${g.desc}</p><div class="card-foot"><span class="genre">${g.genre}</span><button class="details" data-detail="${g.id}">VIEW DETAILS ↗</button></div></div></article>`).join(""):`<div class="empty">No games found. Try another search or category.</div>`;
+}
+grid.addEventListener("click",e=>{
+ const fav=e.target.closest("[data-save]");if(fav){const id=Number(fav.dataset.save);saved=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];localStorage.setItem("rrgz-favs",JSON.stringify(saved));render();return}
+ const detail=e.target.closest("[data-detail]");if(detail){const g=games.find(x=>x.id===Number(detail.dataset.detail));document.getElementById("modalTitle").textContent=g.name;document.getElementById("modalDesc").textContent=g.desc;document.getElementById("modalMeta").textContent=`GENRE: ${g.genre.toUpperCase()}  ·  PLATFORMS: ${g.platform}  ·  RATING: ${g.rating}`;document.getElementById("modal").classList.add("show")}
+});
+search.addEventListener("input",render);
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeFilter=b.dataset.filter;render()}));
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+document.getElementById("closeModal").addEventListener("click",closeModal);document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("nav").classList.toggle("open"));
+document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>document.getElementById("nav").classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();render();
+</script>
+</body>
+</html>
